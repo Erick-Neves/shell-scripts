@@ -13,10 +13,16 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Setup SSH
-      uses: webfactory/ssh-agent@v0.5.5
+    - name: Action-SSH
+      uses: tiyee/action-ssh@v1.0.1
       with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-    - name: Execute SSH Command
-      run: ssh -o StrictHostKeyChecking=no prod_user@191.96.251.3 'docker ps'
+        # Command to execute on the remote server.
+        command: docker ps
+        # Hostname or IP address of the server.
+        host: 191.96.251.3
+        # Username for authentication.
+        username: prod_user
+        # Port number of the server.
+        port: 22
+        # File  string that contains a private key for either key-based or hostbased user authentication (OpenSSH format)
+        privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
