@@ -19,4 +19,4 @@ jobs:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
     - name: Execute SSH Command
-      run: ssh -o StrictHostKeyChecking=no user@your-production-server 'your-command'
+      run: ssh -o StrictHostKeyChecking=no prod_user@191.96.251.3 'docker ps'
