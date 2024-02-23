@@ -1,0 +1,22 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main  # ajuste conforme necessário
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Setup SSH
+      uses: webfactory/ssh-agent@v0.5.5
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Execute SSH Command
+      run: ssh -o StrictHostKeyChecking=no user@your-production-server 'your-command'
