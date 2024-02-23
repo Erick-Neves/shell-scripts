@@ -13,17 +13,9 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Action-SSH
-      uses: D3rHase/ssh-command-action@v0.2.2
-      with:
-        # Command to execute on the remote server.
-        command: docker ps
-        # Hostname or IP address of the server.
-        host: 191.96.251.3
-        # Username for authentication.
-        user: prod_user
-        # Port number of the server.
-        port: 22
-        # File  string that contains a private key for either key-based or hostbased user authentication (OpenSSH format)
-        privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
-
+    - name: Build and Push Docker Image
+      run: |
+        ssh-keygen
+        ssh-copy-id prod_user@191.96.251.3
+        ssh prod_user@191.96.251.3
+        docker ps
