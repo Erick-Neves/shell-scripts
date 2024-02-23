@@ -14,14 +14,14 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Action-SSH
-      uses: tiyee/action-ssh@v1.0.1
+      uses: D3rHase/ssh-command-action@v0.2.2
       with:
         # Command to execute on the remote server.
         command: docker ps
         # Hostname or IP address of the server.
         host: 191.96.251.3
         # Username for authentication.
-        username: prod_user
+        user: prod_user
         # Port number of the server.
         port: 22
         # File  string that contains a private key for either key-based or hostbased user authentication (OpenSSH format)
