@@ -15,7 +15,6 @@ jobs:
 
     - name: Create SSH
       run: |
-        ssh-keygen
         ssh-copy-id prod_user@191.96.251.3
         ssh prod_user@191.96.251.3
         docker ps
