@@ -15,6 +15,6 @@ jobs:
 
     - name: Create SSH
       run: |
-        apt-get install sshpass
+        sudo apt-get install sshpass
         sshpass -p ${{ secrets.SSH_PASSWORD }} ssh prod_user@${{ secrets.HOSTNAME }}
         docker ps
