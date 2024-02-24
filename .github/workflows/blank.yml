@@ -15,6 +15,6 @@ jobs:
 
     - name: Create SSH
       run: |
-        ssh-copy-id prod_user@191.96.251.3
-        ssh prod_user@191.96.251.3
+        apt-get install sshpass
+        sshpass -p ${{ secrets.SSH_PASSWORD }} ssh prod_user@${{ secrets.HOSTNAME }}
         docker ps
