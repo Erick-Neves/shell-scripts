@@ -13,8 +13,19 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Create SSH
+    - name: Set up SSH key
       run: |
-        sudo apt-get install sshpass
-        sshpass -p ${{ secrets.SSH_PASSWORD }} ssh prod_user@${{ secrets.HOSTNAME }}
-        docker ps
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key
+        chmod 600 ssh_key
+        eval "$(ssh-agent -s)"
+        ssh-add ssh_key
+
+    - name: Execute SSH Command
+      run: |
+        ssh -o StrictHostKeyChecking=no prod_user@${{ secrets.HOSTNAME }} 'docker ps'
+      
+
+    #- name: Create SSH
+    #  run: |
+    #    sudo apt-get install sshpass
+    #    sshpass -p ${{ secrets.SSH_PASSWORD }} ssh prod_user@${{ secrets.HOSTNAME }} docker ps
