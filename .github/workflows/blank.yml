@@ -13,7 +13,7 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Build and Push Docker Image
+    - name: Create SSH
       run: |
         ssh-keygen
         ssh-copy-id prod_user@191.96.251.3
